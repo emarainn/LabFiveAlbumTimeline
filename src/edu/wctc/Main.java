@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Main {
@@ -27,17 +28,19 @@ public class Main {
         //2. Calculate and print the amount of time between The Joshua Tree and their next album,
         //Rattle and Hum, which was released on October 10th, 1988.
         System.out.println("\nJoshua Tree - Rattle and Hum");
-        //JST
 
-        double hours = 8760;
         LocalDate rHum = LocalDate.of(1988, 10, 10);
         LocalTime jS = LocalTime.of(0,0,0);
         //Rattle and Hum Date
         LocalTime rH = LocalTime.of(0, 0,0);
         //Duration for Time:
         Duration d1 = Duration.between(jS.atDate(jTree), rH.atDate(rHum));
+        Period p2 = Period.between(jTree, rHum);
 
-        System.out.println("Hours: " + d1.toHours()
+        System.out.println("\nYears: " + p2.getYears()
+                + "\nMonths: " + p2.getMonths()
+                + "\nDays: " + p2.getDays()
+                + "\nHours: " + d1.toHours()
                 + "\nMinutes: " + d1.toMinutes()
                 + "\nSeconds: " + d1.getSeconds());
 
@@ -45,15 +48,13 @@ public class Main {
         //same amount of time after Rattle and Hum.
         System.out.println("\nRattle and Hum - Bum and Chum");
 
-        var total = d1.toHours() / 24;
-
-        System.out.println("Calculation: Hours / HoursInDay = How Many Days to Add"
-                + "\n" + d1.toHours() + " / 24 = " + total );
-
-        LocalDate bumChum = rHum.plus(total, ChronoUnit.DAYS);
+        LocalDate bumChum = rHum.plus(p2);
 
         System.out.println("\nRelease Date Rattle and Hum: " + rHum
                 + "\nRelease Date of Bum and Chum: " + bumChum);
+
+
     }
 
 }
+
